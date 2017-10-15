@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Spring Gonzalo Aguilar</title>
+</head>
+<body>
+    <h1 th:text="#{welcome}"> Default greetings </h1>
+    <br/>
+    <ul>
+        <li> <a th:text="#{list}" href="/listado">Listado de productos</a> </li>
+        <li> <a th:text="#{insert}" href="/insertar"> Nuevo producto</a></li>
+    </ul>
+    <h1 th:text="#{t1}"> Inserccion de productos </h1>
+     <form th:action="@{/insertar}" method="POST" th:object="${producto}">
+         <p>Id:</p><input type="text" th:field="*{id}"/><br/>
+   
+         <p th:text="#{name}">Nombre:</p><input type="text" th:field="*{nombre}"/><br/>
+    <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Name Error</span>
+   
+    <p th:text="#{description}">Descripción: </p><input type="text" th:field="*{descripcion}"/><br/>
+    <span th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}">Name Error</span>
+    
+    <p th:text="#{price}">Precio:</p><input type="text" th:field="*{precio}"/><br/><br/>
+   
+   <button type="submit">Insertar</button>
+   <br/>
+   <br/>
+ </form> 
+  <!--   <table>
+  <tr>
+  	<td>Id</td>
+  	<td>Nombre</td>
+  	<td>Descripcion</td>
+        <td>Precio</td>
+  </tr>
+  <tr th:each="e:${productos}">
+   <td th:text="${e.id}"></td>
+   <td th:text="${e.nombre}"></td>
+   <td th:text="${e.descripcion}"></td>
+   <td th:text="${e.precio}"></td>
+  </tr>
+ </table>
+  -->
+  <h1 th:text="#{t2}"> Listado de productos </h1>
+  <ul th:each="e:${productos}">
+        <li th:text="${e.nombre}"> </li>
+  </ul>
+  <h1 th:text="#{t3}"> Tabla de productos </h1>
+  <table style="border:1px solid black;">
+  <tr style="border:1px solid black;">
+  	<td style="border:1px solid black;">Id</td>
+  	<td style="border:1px solid black;">Nombre</td>
+  	<td style="border:1px solid black;">Descripcion</td>
+        <td style="border:1px solid black;">Precio</td>
+  </tr>
+  <tr th:each="e:${productos}" style="border:1px solid black;">
+      <td th:text="${e.id}" style="border:1px solid black;"></td> 
+   <td th:text="${e.nombre}" style="border:1px solid black;"></td>
+   <td th:text="${e.descripcion}" style="border:1px solid black;"></td>
+   <td th:text="${e.precio}" style="border:1px solid black;"></td>
+  </tr>
+ </table>
+</body>
+</html>
